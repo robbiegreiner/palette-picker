@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/robbiegreiner/palette-picker/issues"
   },
-  "homepage": "https://github.com/robbiegreiner/palette-picker#readme"
+  "homepage": "https://github.com/robbiegreiner/palette-picker#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
