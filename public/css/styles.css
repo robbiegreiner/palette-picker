@@ -70,6 +70,10 @@ header {
   transition: all .15s ease-in-out;
 }
 
+.save-container {
+  display: flex;
+}
+
 /*.new-button:hover {
   background-color: white;
   color: #008A9A;
