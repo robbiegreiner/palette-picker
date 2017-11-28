@@ -4,7 +4,6 @@ const generateRandomColor = () => {
   for (let i = 0; i < 6; i++) {
     hex += chars[Math.floor(Math.random() * 16)];
   }
-  console.log(hex);
   return hex;
 };
 
@@ -24,7 +23,8 @@ const setPalette = () => {
   }
 };
 
-$(document).ready(setPalette);
+
 
 // event listeners
+$(document).ready(setPalette);
 $('.new-button').on('click', setPalette);
