@@ -24,40 +24,29 @@ header {
 
 .color-container {
   display: flex;
-  width: 100%;
+  width: 90%;
   justify-content: center;
 }
 
 .color {
   height: 60vh;
-  width: 15%;
+  width: 20%;
   border: 2px solid black;
-  margin-left: 20px;
+  margin-left: 0px;
   margin-top: 20px;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.color1 {
-  margin-left: 0;
-  background: green;
+.color {
+  background: #0095A4;
 }
 
-.color2 {
-  background: blue;
-}
-
-.color3 {
-  background: yellow;
-}
-
-.color4 {
-  background: steelblue;
-}
-
-.color5 {
-  background: black;
+.hex-text {
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .new-button {
@@ -81,8 +70,8 @@ header {
   transition: all .15s ease-in-out;
 }
 
-.new-button:hover {
+/*.new-button:hover {
   background-color: white;
   color: #008A9A;
   border: 2px solid #2C4154;
-}
+}*/

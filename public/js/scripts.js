@@ -17,13 +17,14 @@ const generateRandomColor = () => {
 // $('.color1').css('background-color', colorHex1);
 
 const setPalette = () => {
-  for(let i = 1; i < 6; i++){
+  for (let i = 1; i < 6; i++){
     const randomHex = generateRandomColor();
     $(`.color${i}`).css('background-color', randomHex);
+    $(`#color${i}Hex`).text(randomHex)
   }
 };
 
-
+$(document).ready(setPalette);
 
 // event listeners
 $('.new-button').on('click', setPalette);
