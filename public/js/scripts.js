@@ -8,10 +8,22 @@ const generateRandomColor = () => {
   return hex;
 };
 
-let color1 = generateRandomColor();
-let color2 = generateRandomColor();
-let color3 = generateRandomColor();
-let color4 = generateRandomColor();
-let color5 = generateRandomColor();
+// let colorHex1 = generateRandomColor();
+// let colorHex2 = generateRandomColor();
+// let colorHex3 = generateRandomColor();
+// let colorHex4 = generateRandomColor();
+// let colorHex5 = generateRandomColor();
 
-$('.new-button').on('click', generateRandomColor);
+// $('.color1').css('background-color', colorHex1);
+
+const setPalette = () => {
+  for(let i = 1; i < 6; i++){
+    const randomHex = generateRandomColor();
+    $(`.color${i}`).css('background-color', randomHex);
+  }
+};
+
+
+
+// event listeners
+$('.new-button').on('click', setPalette);
