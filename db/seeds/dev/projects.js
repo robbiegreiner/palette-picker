@@ -21,7 +21,7 @@ exports.seed = function(knex, Promise) {
               project_id: project[0]
             },
             {
-              id: 1,
+              id: 2,
               name: 'Dirty Heads',
               hex1: '#769DA3',
               hex2: '#5CF36D',
@@ -34,8 +34,7 @@ exports.seed = function(knex, Promise) {
         })
         .then(() => console.log('The data was successfully seeded!'))
         .catch(error => console.log(`There was a data seeding error ${ error }`))
-      ])
-      .catch(error => console.log(`There was a data seeding error ${ error }`));
-    });
-
+      ]);
+    })
+    .catch(error => console.log(`There was a data seeding error ${ error }`));
 };
