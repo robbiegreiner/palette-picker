@@ -35,7 +35,8 @@ const makeProjectList = (projects) => {
 const getProjects = () => {
   fetch('/api/v1/projects')
   .then(response => response.json())
-  .then(data => console.log(data));
+  .then(projects => makeProjectList(projects))
+  .catch(error => console.log({ error }))
 }
 
 
