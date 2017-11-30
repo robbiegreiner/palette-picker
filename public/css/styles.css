@@ -79,3 +79,8 @@ header {
   color: #008A9A;
   border: 2px solid #2C4154;
 }*/
+
+.small-color {
+  width: 100px;
+  height: 100px;
+}

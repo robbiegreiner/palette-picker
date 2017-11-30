@@ -32,12 +32,64 @@ const makeProjectList = (projects) => {
   });
 };
 
+const showPalettes = (palettes) => {
+  palettes.forEach(palette => {
+    $(`.project${palette.project_id}`).append(`
+      <div class='full-palette'>
+        <div class='small-color'
+          style='background-color: ${palette.hex1}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex2}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex3}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex4}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex5}'>
+        </div>
+      </div>
+    `);
+  });
+};
+
+const getPalettes = (projects) => {
+  projects.forEach(project => {
+    fetch(`/api/v1/projects/${project.id}/palettes`)
+      .then( response => response.json())
+      .then( palettes => showPalettes(palettes));
+  });
+};
+
+const showProjects = (projects) => {
+  projects.forEach(project => {
+    $('.projects-container').append(`
+      <div class='project${project.id} project'>
+        <h2>${project.name}</h2>
+      </div>
+    `);
+  });
+};
+
 const getProjects = () => {
   fetch('/api/v1/projects')
   .then(response => response.json())
-  .then(projects => makeProjectList(projects))
-  .catch(error => console.log({ error }))
-}
+  .then(projects => {
+    makeProjectList(projects);
+    getPalettes(projects);
+    showProjects(projects);
+  })
+  .catch(error => console.log({ error }));
+};
+
+
+
+
+
+
 
 
 
