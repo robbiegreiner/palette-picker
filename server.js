@@ -78,6 +78,20 @@ app.get('/api/v1/projects/:id/palettes', (request, response) => {
     });
 });
 
+app.delete('/api/v1/palettes/:id', (request, response) => {
+  const id = request.params;
+
+  database('palettes').where(id).del()
+    .then(result => {
+      if (!result) {
+        response.status(422).json({ error: 'no palette'});
+      } else {
+        response.sendStatus(204);
+      }
+    })
+    .catch(error => response.status(500).json({ error }));
+});
+
 
 
 
