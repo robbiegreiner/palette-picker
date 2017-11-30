@@ -33,26 +33,37 @@ describe('Client Routes', () => {
 });
 
 describe('API Routes', () => {
-  before(() => {
+  before((done) => {
     database.migrate.latest()
+    .then( () => done())
     .catch(error => {
       throw error;
     });
   });
 
-  beforeEach(() => {
+  beforeEach((done) => {
     database.seed.run()
+    .then(() => done())
     .catch(error => {
       throw error;
     });
   });
 
   describe('GET /api/v1/projects', () => {
-    it('should get projects from database', () => {
+    it('should get projects from database', (done) => {
       chai.request(server)
       .get('/api/v1/projects')
       .then(response => {
         response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+        response.body.length.should.equal(1);
+        response.body[0].should.have.property('id');
+        response.body[0].id.should.equal(1);
+        done();
+      })
+      .catch(error => {
+        throw error;
       });
     });
   });
