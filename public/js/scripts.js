@@ -37,6 +37,7 @@ const showPalettes = (palettes) => {
     $(`.project${palette.project_id}`).append(`
       <div class='full-palette'>
         <h3>${palette.name}</h3>
+        <button class='delete-button'>Delete</button>
         <div class='small-color'
           style='background-color: ${palette.hex1}'>
         </div>
