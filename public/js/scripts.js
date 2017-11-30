@@ -111,6 +111,24 @@ const savePalette = () => {
   $('.name-input'.val(''));
 };
 
+const saveProject = () => {
+  const projectName = JSON.stringify({
+    name: $('.project-input').val()
+  });
+
+  fetch('/api/v1/projects', {
+    method: 'POST',
+    body: projectName,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(project => addProject(project[0].name, project[0].id))
+    .catch(error => console.log(error));
+
+  $('.project-input').val('');
+};
 
 
 
@@ -123,3 +141,4 @@ $(document).ready(getProjects);
 $('.color').on('click', ".lock-button", (event => lockUnlockColor(event)));
 $('.new-button').on('click', setPalette);
 $('.save-button').on('click', savePalette);
+$('.save-project').on('click', saveProject);
