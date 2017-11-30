@@ -35,9 +35,9 @@ const makeProjectList = (projects) => {
 const showPalettes = (palettes) => {
   palettes.forEach(palette => {
     $(`.project${palette.project_id}`).append(`
-      <div class='full-palette'>
+      <div class='full-palette' id='${palette.id}'>
         <h3>${palette.name}</h3>
-        <button class='delete-button'>Delete</button>
+        <button class='delete-palette'>Delete</button>
         <div class='small-color'
           style='background-color: ${palette.hex1}'>
         </div>
@@ -109,7 +109,7 @@ const savePalette = () => {
     .then(palettes => showPalettes(palettes))
     .catch(error => console.log(error));
 
-  $('.name-input'.val(''));
+  $('.name-input').val('');
 };
 
 const saveProject = () => {
@@ -132,7 +132,17 @@ const saveProject = () => {
   $('.project-input').val('');
 };
 
+const deletePalette = (event) => {
+  const id = $(event.target).closest('.full-palette').attr('id');
 
+  fetch(`/api/v1/palettes/${id}`, {
+    method: 'DELETE'
+  })
+    .then(response => response.json())
+    .catch(error => console.log(error));
+
+  $(event.target).closest('.full-palette').remove();
+};
 
 
 
@@ -144,3 +154,4 @@ $('.color').on('click', ".lock-button", (event => lockUnlockColor(event)));
 $('.new-button').on('click', setPalette);
 $('.save-button').on('click', savePalette);
 $('.save-project').on('click', saveProject);
+$('.projects-container').on('click', '.delete-palette', (event) => deletePalette(event));
