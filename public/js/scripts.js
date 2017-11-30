@@ -32,11 +32,35 @@ const makeProjectList = (projects) => {
   });
 };
 
+const showPalettes = (palettes) => {
+  palettes.forEach(palette => {
+    $(`.project${palette.project_id}`).append(`
+      <div class='full-palette'>
+        <div class='small-color'
+          style='background-color: ${palette.hex1}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex2}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex3}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex4}'>
+        </div>
+        <div class='small-color'
+          style='background-color: ${palette.hex5}'>
+        </div>
+      </div>
+    `);
+  });
+};
+
 const getPalettes = (projects) => {
   projects.forEach(project => {
     fetch(`/api/v1/projects/${project.id}/palettes`)
       .then( response => response.json())
-      .then( palette => console.log(palette));
+      .then( palettes => showPalettes(palettes));
   });
 };
 
@@ -60,6 +84,8 @@ const getProjects = () => {
   })
   .catch(error => console.log({ error }));
 };
+
+
 
 
 
