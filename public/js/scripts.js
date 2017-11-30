@@ -36,6 +36,7 @@ const showPalettes = (palettes) => {
   palettes.forEach(palette => {
     $(`.project${palette.project_id}`).append(`
       <div class='full-palette'>
+        <h3>${palette.name}</h3>
         <div class='small-color'
           style='background-color: ${palette.hex1}'>
         </div>
@@ -85,7 +86,30 @@ const getProjects = () => {
   .catch(error => console.log({ error }));
 };
 
+const savePalette = () => {
+  const palette = {
+    name: $('.name-input').val(),
+    hex1: $('.color1').css('background-color'),
+    hex2: $('.color2').css('background-color'),
+    hex3: $('.color3').css('background-color'),
+    hex4: $('.color4').css('background-color'),
+    hex5: $('.color5').css('background-color'),
+    project_id: $('.drop-down').val()
+  };
 
+  fetch('/api/v1/palettes', {
+    method: 'POST',
+    body: JSON.stringify(palette),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(palettes => showPalettes(palettes))
+    .catch(error => console.log(error));
+
+  $('.name-input'.val(''));
+};
 
 
 
@@ -98,3 +122,4 @@ $(document).ready(setPalette);
 $(document).ready(getProjects);
 $('.color').on('click', ".lock-button", (event => lockUnlockColor(event)));
 $('.new-button').on('click', setPalette);
+$('.save-button').on('click', savePalette);
