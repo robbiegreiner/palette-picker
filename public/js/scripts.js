@@ -77,6 +77,7 @@ const showProjects = (projects) => {
 };
 
 const getProjects = () => {
+  $('.project').remove();
   fetch('/api/v1/projects')
   .then(response => response.json())
   .then(projects => {
@@ -126,7 +127,6 @@ const saveProject = () => {
   })
     .then(response => response.json())
     .then(project => addProject(project[0].name, project[0].id))
-    .then(getProjects())
     .catch(error => console.log(error));
 
   $('.project-input').val('');
@@ -143,6 +143,8 @@ const deletePalette = (event) => {
 
   $(event.target).closest('.full-palette').remove();
 };
+
+
 
 
 
