@@ -32,7 +32,6 @@ exports.seed = function(knex, Promise) {
             }
           ]);
         })
-        .then(() => console.log('The data was successfully seeded!'))
         .catch(error => console.log(`There was a data seeding error ${ error }`))
       ]);
     })
