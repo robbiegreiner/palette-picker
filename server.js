@@ -40,23 +40,39 @@ app.post('/api/v1/projects', (request, response) => {
     }
   }
 
-  database('projects').insert(project, 'id')
+  database('projects').insert(project, '*')
     .then(project => {
-      response.status(201).json({id: project[0] });
+      response.status(201).json(project);
     })
     .catch(error => {
       response.status(500).json({ error });
     });
 });
 
+
 app.delete('api/v1/palettes:id', (request, response) => {
   // JSON palettes
   // request.params.id
 });
 
-app.post('api/v1/palettes', (request, response) => {
-  // JSON palettes
+app.post('/api/v1/palettes', (request, response) => {
+  const palette = request.body;
+
+  for (let requiredParameter of ['name', 'hex1', 'hex2', 'hex3', 'hex4', 'hex5']) {
+    if (!palette[requiredParameter]) {
+      return response.status(422).send({ error: `You're missing a ${requiredParameter}.` });
+    }
+  }
+
+  database('palettes').insert(palette, '*')
+    .then(palette => {
+      response.status(201).json(palette);
+    })
+    .catch(error => {
+      response.status(500).json({ error });
+    });
 });
+
 
 
 
