@@ -32,12 +32,25 @@ const makeProjectList = (projects) => {
   });
 };
 
+const getPalettes = (projects) => {
+  projects.forEach(project => {
+    fetch(`/api/v1/projects/${project.id}/palettes`)
+      .then( response => response.json())
+      .then( palette => console.log(palette));
+  });
+};
+
 const getProjects = () => {
   fetch('/api/v1/projects')
   .then(response => response.json())
-  .then(projects => makeProjectList(projects))
+  .then(projects => {
+    makeProjectList(projects);
+    getPalettes(projects);
+  })
   .catch(error => console.log({ error }))
 }
+
+
 
 
 
