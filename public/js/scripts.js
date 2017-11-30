@@ -10,16 +10,26 @@ const generateRandomColor = () => {
 const setPalette = () => {
   for (let i = 1; i < 6; i++){
     const randomHex = generateRandomColor();
-    // if !color(i) has class locked
-    $(`.color${i}`).css('background-color', randomHex);
-    $(`#color${i}Hex`).text(randomHex);
+    if (!$(`.color${i}`).hasClass('locked')) {
+      $(`.color${i}`).css('background-color', randomHex);
+      $(`#color${i}Hex`).text(randomHex);
+    }
   }
 };
 
 const lockUnlockColor = (event) => {
   const bar = $(event.target);
-  console.log('hey');
   bar.closest('.color').toggleClass('locked');
+};
+
+const addProject = (name, value) => {
+  $('.drop-down').append(`<option value='${value}'>${name}</option>`);
+};
+
+const makeProjectList = (projects) => {
+  projects.forEach(project => {
+    addProject(project.name, project.id);
+  });
 };
 
 
