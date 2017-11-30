@@ -33,5 +33,28 @@ describe('Client Routes', () => {
 });
 
 describe('API Routes', () => {
+  before(() => {
+    database.migrate.latest()
+    .catch(error => {
+      throw error;
+    });
+  });
+
+  beforeEach(() => {
+    database.seed.run()
+    .catch(error => {
+      throw error;
+    });
+  });
+
+  describe('GET /api/v1/projects', () => {
+    it('should get projects from database', () => {
+      chai.request(server)
+      .get('/api/v1/projects')
+      .then(response => {
+        response.should.have.status(200);
+      });
+    });
+  });
 
 });
