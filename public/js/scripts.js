@@ -32,9 +32,16 @@ const makeProjectList = (projects) => {
   });
 };
 
+const getProjects = () => {
+  fetch('/api/v1/projects')
+  .then(response => response.json())
+  .then(data => console.log(data));
+}
+
 
 
 // event listeners
 $(document).ready(setPalette);
+$(document).ready(getProjects);
 $('.color').on('click', ".lock-button", (event => lockUnlockColor(event)));
 $('.new-button').on('click', setPalette);
