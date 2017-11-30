@@ -40,15 +40,28 @@ const getPalettes = (projects) => {
   });
 };
 
+const showProjects = (projects) => {
+  projects.forEach(project => {
+    $('.projects-container').append(`
+      <div class='project${project.id} project'>
+        <h2>${project.name}</h2>
+      </div>
+    `);
+  });
+};
+
 const getProjects = () => {
   fetch('/api/v1/projects')
   .then(response => response.json())
   .then(projects => {
     makeProjectList(projects);
     getPalettes(projects);
+    showProjects(projects);
   })
-  .catch(error => console.log({ error }))
-}
+  .catch(error => console.log({ error }));
+};
+
+
 
 
 
