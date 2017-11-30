@@ -35,7 +35,9 @@ const makeProjectList = (projects) => {
 const showPalettes = (palettes) => {
   palettes.forEach(palette => {
     $(`.project${palette.project_id}`).append(`
-      <div class='full-palette'>
+      <div class='full-palette' id='${palette.id}'>
+        <h3>${palette.name}</h3>
+        <button class='delete-palette'>Delete</button>
         <div class='small-color'
           style='background-color: ${palette.hex1}'>
         </div>
@@ -75,6 +77,7 @@ const showProjects = (projects) => {
 };
 
 const getProjects = () => {
+  $('.project').remove();
   fetch('/api/v1/projects')
   .then(response => response.json())
   .then(projects => {
@@ -85,8 +88,61 @@ const getProjects = () => {
   .catch(error => console.log({ error }));
 };
 
+const savePalette = () => {
+  const palette = {
+    name: $('.name-input').val(),
+    hex1: $('.color1').css('background-color'),
+    hex2: $('.color2').css('background-color'),
+    hex3: $('.color3').css('background-color'),
+    hex4: $('.color4').css('background-color'),
+    hex5: $('.color5').css('background-color'),
+    project_id: $('.drop-down').val()
+  };
 
+  fetch('/api/v1/palettes', {
+    method: 'POST',
+    body: JSON.stringify(palette),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(palettes => showPalettes(palettes))
+    .catch(error => console.log(error));
 
+  $('.name-input').val('');
+};
+
+const saveProject = () => {
+  const projectName = JSON.stringify({
+    name: $('.project-input').val()
+  });
+
+  fetch('/api/v1/projects', {
+    method: 'POST',
+    body: projectName,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(project => addProject(project[0].name, project[0].id))
+    .catch(error => console.log(error));
+
+  $('.project-input').val('');
+};
+
+const deletePalette = (event) => {
+  const id = $(event.target).closest('.full-palette').attr('id');
+
+  fetch(`/api/v1/palettes/${id}`, {
+    method: 'DELETE'
+  })
+    .then(response => response.json())
+    .catch(error => console.log(error));
+
+  $(event.target).closest('.full-palette').remove();
+};
 
 
 
@@ -98,3 +154,6 @@ $(document).ready(setPalette);
 $(document).ready(getProjects);
 $('.color').on('click', ".lock-button", (event => lockUnlockColor(event)));
 $('.new-button').on('click', setPalette);
+$('.save-button').on('click', savePalette);
+$('.save-project').on('click', saveProject);
+$('.projects-container').on('click', '.delete-palette', (event) => deletePalette(event));
