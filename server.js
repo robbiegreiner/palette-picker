@@ -99,4 +99,4 @@ app.listen(app.get('port'), () => {
   console.log(`running on ${app.get('port')}.`);
 });
 
-//module.exports see testing example
+module.exports = app;
