@@ -19,7 +19,19 @@ const setPalette = () => {
 
 const lockUnlockColor = (event) => {
   const bar = $(event.target);
-  bar.closest('.color').toggleClass('locked');
+  if (bar.attr('src') === './assets/unlock.svg'){
+    bar.attr('src', './assets/padlock.svg');
+    bar.closest('.color').toggleClass('locked');
+  } else {
+    bar.attr('src', './assets/unlock.svg');
+    bar.closest('.color').toggleClass('locked');
+  }
+};
+
+const editColor = (event) => {
+  const bar = $(event.target);
+  const barColor = bar.text();
+  bar.closest('.color').css('background-color', barColor);
 };
 
 const addProject = (name, value) => {
@@ -35,7 +47,7 @@ const makeProjectList = (projects) => {
 const showPalettes = (palettes) => {
   palettes.forEach(palette => {
     $(`.project${palette.project_id}`).append(`
-      <div class='full-palette' id='${palette.id}'>
+      <div class='full-palette' data-colorlist='${JSON.stringify([palette.hex1, palette.hex2, palette.hex3, palette.hex4, palette.hex5])}' id='${palette.id}'>
         <h3>${palette.name}</h3>
         <button class='delete-palette'>Delete</button>
         <div class='small-color'
@@ -55,6 +67,16 @@ const showPalettes = (palettes) => {
         </div>
       </div>
     `);
+  });
+};
+
+const showSavedPaletteAbove = (event) => {
+  const palette = $(event.target).closest('.full-palette');
+  const colors = JSON.parse(palette.attr('data-colorlist'));
+  console.log(colors);
+
+  colors.forEach((color, index) => {
+    $(`.color${index + 1}`).css('background-color', color);
   });
 };
 
@@ -126,7 +148,10 @@ const saveProject = () => {
     }
   })
     .then(response => response.json())
-    .then(project => addProject(project[0].name, project[0].id))
+    .then(project => {
+      addProject(project[0].name, project[0].id);
+      showProjects([project[0]]);
+    })
     .catch(error => console.log(error));
 
   $('.project-input').val('');
@@ -152,8 +177,10 @@ const deletePalette = (event) => {
 // event listeners
 $(document).ready(setPalette);
 $(document).ready(getProjects);
-$('.color').on('click', ".lock-button", (event => lockUnlockColor(event)));
+$('.color').on('click', '.lock-button', (event => lockUnlockColor(event)));
+$('.color').on('focusout', '.hex-text', (event) => editColor(event));
 $('.new-button').on('click', setPalette);
 $('.save-button').on('click', savePalette);
 $('.save-project').on('click', saveProject);
 $('.projects-container').on('click', '.delete-palette', (event) => deletePalette(event));
+$('.projects-container').on('click', '.full-palette', (event) => showSavedPaletteAbove(event));
