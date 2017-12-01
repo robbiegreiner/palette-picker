@@ -26,7 +26,7 @@ header {
 
 .color-container {
   display: flex;
-  width: 90%;
+  width: 100%;
   justify-content: center;
 }
 
@@ -35,7 +35,7 @@ header {
   width: 20%;
   border: 2px solid black;
   margin-left: 0px;
-  margin-top: 20px;
+  margin-top: 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -116,6 +116,7 @@ img {
   width: 100px;
   height: 30px;
   font-size: 14px;
+  background-color: #0095A4;
 }
 
 .projects-container {
