@@ -20,6 +20,10 @@ run `npm node server.js`
 
 ### Screenshots
 
+#### Screenshot 1 (Top-Half)
+
 ![screen shot 2017-12-01 at 11 15 54 am](https://user-images.githubusercontent.com/28495779/33496873-142e0560-d689-11e7-9176-9afbfd5a6304.png)
+
+#### Screenshot 2 (Bottom-Half)
 
 ![screen shot 2017-12-01 at 11 19 52 am](https://user-images.githubusercontent.com/28495779/33497002-996f9b44-d689-11e7-8cee-845bb2f2af85.png)
