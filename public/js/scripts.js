@@ -138,7 +138,10 @@ const saveProject = () => {
     }
   })
     .then(response => response.json())
-    .then(project => addProject(project[0].name, project[0].id))
+    .then(project => {
+      addProject(project[0].name, project[0].id);
+      showProjects([project[0]]);
+    })
     .catch(error => console.log(error));
 
   $('.project-input').val('');
