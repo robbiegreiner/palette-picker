@@ -169,11 +169,6 @@ const deletePalette = (event) => {
   $(event.target).closest('.full-palette').remove();
 };
 
-
-
-
-
-
 // event listeners
 $(document).ready(setPalette);
 $(document).ready(getProjects);
@@ -183,4 +178,4 @@ $('.new-button').on('click', setPalette);
 $('.save-button').on('click', savePalette);
 $('.save-project').on('click', saveProject);
 $('.projects-container').on('click', '.delete-palette', (event) => deletePalette(event));
-$('.projects-container').on('click', '.full-palette', (event) => showSavedPaletteAbove(event));
+$('.projects-container').on('click', '.small-color', (event) => showSavedPaletteAbove(event));

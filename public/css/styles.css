@@ -52,10 +52,9 @@ header {
 .new-button {
   width: 200px;
   height: 50px;
-  margin-top: 30px;
   cursor: pointer;
-  margin: 20px 0px 10px 0px;
-  background-color: #008A9A;
+  margin: 40px 0px 40px 0px;
+  background-color: #0095A4;
   color: white;
   text-align: center;
   white-space: nowrap;
@@ -72,6 +71,40 @@ header {
 
 .save-container {
   display: flex;
+  margin-bottom: 30px;
+}
+
+.name-input, .project-input {
+  width: 200px;
+  height: 30px;
+  font-size: 16px;
+}
+
+.name-input {
+  margin-right: 10px;
+}
+
+.drop-down {
+  height: 30px;
+  width: 100px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.save-button {
+  width: 100px;
+  font-size: 14px;
+}
+
+.project-input {
+  margin-right: 10px;
+}
+
+.save-project {
+  margin-right: 111px;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
 }
 
 /*.new-button:hover {
