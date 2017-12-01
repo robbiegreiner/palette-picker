@@ -118,6 +118,10 @@ img {
   border: 2px solid black;
 }
 
+.save-button:disabled {
+  background-color: lightgray;
+}
+
 .project-input {
   margin-right: 10px;
 }
