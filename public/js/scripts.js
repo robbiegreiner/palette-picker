@@ -98,13 +98,7 @@ const showProjects = (projects) => {
   });
 };
 
-const checkDuplicateNames = (projects) => {
-  const projectName = $('.project-input').val();
-
-};
-
 const getProjects = () => {
-  checkDuplicateNames();
   $('.project').remove();
   fetch('/api/v1/projects')
   .then(response => response.json())
@@ -142,7 +136,21 @@ const savePalette = () => {
 };
 
 const saveProject = () => {
-  checkDuplicateNames();
+  const projectName = $('.project-input').val();
+
+  fetch('/api/v1/projects')
+    .then(response => response.json())
+    .then(projects => {
+      const duplicate = projects.find(project => projectName === project.name);
+      if (!duplicate) {
+        postProject();
+      } else {
+        alert('Project name already in use');
+      }
+    });
+};
+
+const postProject = () => {
   const projectName = JSON.stringify({
     name: $('.project-input').val()
   });
