@@ -17,9 +17,17 @@ const setPalette = () => {
   }
 };
 
+//add images
 const lockUnlockColor = (event) => {
   const bar = $(event.target);
-  bar.closest('.color').toggleClass('locked');
+  if (bar.attr('src') === './assets/unlock.svg'){
+    bar.attr('src', './assets/padlock.svg');
+    bar.closest('.color').toggleClass('locked');
+  } else {
+    bar.attr('src', './assets/unlock.svg');
+    bar.closest('.color').toggleClass('locked');
+  }
+
 };
 
 const addProject = (name, value) => {
