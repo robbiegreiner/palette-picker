@@ -194,7 +194,7 @@ describe('API Routes', () => {
         response.body[0].should.have.property('id');
         response.body[0].id.should.equal(3);
         response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('Voldemort\'s New Blog')
+        response.body[0].name.should.equal('Voldemort\'s New Blog');
 
         chai.request(server)
         .get('/api/v1/projects')
@@ -233,7 +233,7 @@ describe('API Routes', () => {
         response.body[0].should.have.property('name');
         response.body[0].id.should.equal(3);
         response.body[0].should.have.property('name');
-        response.body[0].name.should.equal('Modest Mouse')
+        response.body[0].name.should.equal('Modest Mouse');
 
         chai.request(server)
         .get('/api/v1/projects/1/palettes')
@@ -255,6 +255,7 @@ describe('API Routes', () => {
           response.body[2].hex3.should.equal('#BB10A0');
           response.body[2].hex4.should.equal('#36DE11');
           response.body[2].hex5.should.equal('#FDB53F');
+          response.body[2].project_id.should.equal(1);
           done();
         })
         .catch(error => {
@@ -264,10 +265,26 @@ describe('API Routes', () => {
     });
   });
 
+  describe('DELETE /api/v1/palettes/:id', () => {
+    it('should destroy palette from database', (done) => {
+      chai.request(server)
+      .delete('/api/v1/palettes/1')
+      .then(response => {
+        response.should.have.status(204);
+        done();
+      })
+      .catch(error => {
+        throw error;
+      });
+    });
 
-
-
-
-
-
-});//end of api routes
+    it('should return status 422 if palette does not exist', (done) => {
+      chai.request(server)
+      .delete('/api/v1/palettes/300')
+      .then(response => {
+        response.should.have.status(422);
+        done();
+      });
+    });
+  });
+});
