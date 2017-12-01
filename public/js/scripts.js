@@ -19,11 +19,11 @@ const setPalette = () => {
 
 const lockUnlockColor = (event) => {
   const bar = $(event.target);
-  if (bar.attr('src') === './assets/unlock.svg'){
-    bar.attr('src', './assets/padlock.svg');
+  if (bar.attr('src') === './assets/unlock-white.svg'){
+    bar.attr('src', './assets/padlock-white.svg');
     bar.closest('.color').toggleClass('locked');
   } else {
-    bar.attr('src', './assets/unlock.svg');
+    bar.attr('src', './assets/unlock-white.svg');
     bar.closest('.color').toggleClass('locked');
   }
 };

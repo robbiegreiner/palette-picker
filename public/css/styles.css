@@ -31,9 +31,10 @@ header {
 }
 
 .color {
-  height: 60vh;
+  height: 55vh;
   width: 20%;
-  border: 2px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
   margin-left: 0px;
   margin-top: 0px;
   display: flex;
@@ -54,6 +55,7 @@ img {
   margin-bottom: 20px;
   margin-top: 10px;
   font-size: 20px;
+  color: white;
 }
 
 .new-button {
@@ -67,13 +69,13 @@ img {
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
-  border: 2px solid #41403D;
   padding: .75rem 1rem;
   font-size: 16px;
   letter-spacing: 2px;
   line-height: 1.25;
   border-radius: .25rem;
   transition: all .15s ease-in-out;
+  border: 2px solid black;
 }
 
 .save-container {
@@ -96,15 +98,24 @@ img {
 }
 
 .drop-down {
-  height: 30px;
+  height: 33px;
   width: 100px;
   margin-right: 10px;
   font-size: 14px;
+  background-color: #0095A4;
+  color: white;
+  border: 2px solid black;
 }
 
 .save-button {
+  height: 33px;
   width: 100px;
   font-size: 14px;
+  background-color: #0095A4;
+  color: white;
+  border-radius: .25rem;
+  transition: all .15s ease-in-out;
+  border: 2px solid black;
 }
 
 .project-input {
@@ -114,9 +125,17 @@ img {
 .save-project {
   margin-right: 111px;
   width: 100px;
-  height: 30px;
+  height: 33px;
   font-size: 14px;
   background-color: #0095A4;
+  color: white;
+  border-radius: .25rem;
+  transition: all .15s ease-in-out;
+  border: 2px solid black;
+}
+
+.new-button:hover, .save-project:hover, .save-button:hover {
+  color: black;
 }
 
 .projects-container {
