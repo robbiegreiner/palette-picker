@@ -1,4 +1,4 @@
-//import express
+//import express to use on top of NodeJS
 const express = require('express');
 const app = express();
 
@@ -11,23 +11,23 @@ const bodyParser = require('body-parser');
 
 //set development port to 3000, access this port in the browser
 app.set('port', process.env.PORT || 3000);
-//serving up static pages from inside the public folder
+//serving up all static pages from inside the public folder
 app.use(express.static(__dirname + '/public'));
 
 //middleware to parse request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//create endpoint for to get project data
+//create endpoint to get project data
 app.get('/api/v1/projects', (request, response) => {
-  //select what db were are getting from
+  //select what database/table in our database we are getting data from
   database('projects').select()
-    //use .then for async promise
+    //using .then for async promises
     .then((projects) => {
       //set response status to 200 if promise is resolved and return the projects
       response.status(200).json(projects);
     })
-    //error if promise is not resolved
+    //throw an error if promise is not resolved
     .catch((error) => {
       //set status to 500 if there is a server error
       response.status(500).json({ error });
@@ -36,10 +36,11 @@ app.get('/api/v1/projects', (request, response) => {
 
 //creates endpoint to get the palettes
 app.get('/api/v1/palettes', (request, response) => {
-  //saying what database to select from
+  //saying what database/table in our database to select from
   database('palettes').select()
+    //.then for async promises
     .then((palettes) => {
-      //set response status to 200 if promise is resolved and return the projects
+      //set the response status to 200 if promise is resolved and return the palettes
       response.status(200).json(palettes);
     })
     .catch((error) => {
@@ -52,14 +53,14 @@ app.post('/api/v1/projects', (request, response) => {
   //setting the request body to a variable
   const project = request.body;
 
-  //requires parameters or else respond with 422 error
+  //user must submit all the required parameters in the body or else respond with 422 error
   for (let requiredParameter of ['name']) {
     if (!project[requiredParameter]) {
       return response.status(422).send({ error: `You're missing a ${requiredParameter}.` });
     }
   }
 
-  //specify the database to insert into and returning what is entered into the database
+  //specify the database/table to insert into and returning what is entered into the database
   database('projects').insert(project, '*')
     .then(project => {
       //status 201 if promise is resolved and return the whole project
@@ -75,7 +76,7 @@ app.post('/api/v1/palettes', (request, response) => {
   //setting body to a variable
   const palette = request.body;
 
-  //requires parameters or else respond with 422 error
+  //user must submit the required parameters in the body or else respond with 422 error
   for (let requiredParameter of ['name', 'hex1', 'hex2', 'hex3', 'hex4', 'hex5']) {
     if (!palette[requiredParameter]) {
       return response.status(422).send({ error: `You're missing a ${requiredParameter}.` });
