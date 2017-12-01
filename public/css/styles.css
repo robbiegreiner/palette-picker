@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 header {
@@ -44,6 +45,10 @@ header {
   background: #0095A4;
 }
 
+img {
+  cursor: pointer;
+}
+
 .hex-text {
   margin-bottom: 20px;
   margin-top: 10px;
@@ -72,6 +77,10 @@ header {
 .save-container {
   display: flex;
   margin-bottom: 30px;
+}
+
+.save-area-text {
+  margin-bottom: 20px;
 }
 
 .name-input, .project-input {
@@ -107,6 +116,38 @@ header {
   font-size: 14px;
 }
 
+.projects-container {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  justify-content: center;
+
+}
+
+.project {
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  width: 490px;
+}
+
+.project-name {
+  margin-bottom: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  padding: 10px;
+}
+
+.palette-name {
+  margin-top: 20px;
+  margin-right: 20px;
+  border: 0px solid black;
+  width: 100px;
+  word-wrap: normal;
+  text-align: center;
+}
+
+
 /*.new-button:hover {
   background-color: white;
   color: #008A9A;
@@ -115,9 +156,20 @@ header {
 
 .full-palette {
   display: flex;
+  margin-bottom: 30px;
 }
 
 .small-color {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+}
+
+.delete-palette {
+  width: 60px;
+  height: 62px;
+  font-size: 14px;
+  border: 1px solid black;
+  border-radius: 0;
+  background-color: #E6E6E6;
 }

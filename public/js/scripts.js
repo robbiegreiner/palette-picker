@@ -48,8 +48,7 @@ const showPalettes = (palettes) => {
   palettes.forEach(palette => {
     $(`.project${palette.project_id}`).append(`
       <div class='full-palette' data-colorlist='${JSON.stringify([palette.hex1, palette.hex2, palette.hex3, palette.hex4, palette.hex5])}' id='${palette.id}'>
-        <h3>${palette.name}</h3>
-        <button class='delete-palette'>Delete</button>
+        <h3 class='palette-name'>${palette.name}</h3>
         <div class='small-color'
           style='background-color: ${palette.hex1}'>
         </div>
@@ -65,6 +64,7 @@ const showPalettes = (palettes) => {
         <div class='small-color'
           style='background-color: ${palette.hex5}'>
         </div>
+        <button class='delete-palette'>Delete</button>
       </div>
     `);
   });
@@ -92,7 +92,7 @@ const showProjects = (projects) => {
   projects.forEach(project => {
     $('.projects-container').append(`
       <div class='project${project.id} project'>
-        <h2>${project.name}</h2>
+        <h2 class='project-name'>${project.name}</h2>
       </div>
     `);
   });
