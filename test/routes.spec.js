@@ -212,6 +212,60 @@ describe('API Routes', () => {
     });
   });
 
+  describe('POST /api/v1/projects/', () => {
+    it('should add a new palette in the database', (done) => {
+      chai.request(server)
+      .post('/api/v1/palettes')
+      .send({
+        id: 3,
+        name: 'Modest Mouse',
+        hex1: '#A9E9D2',
+        hex2: '#9C5553',
+        hex3: '#BB10A0',
+        hex4: '#36DE11',
+        hex5: '#FDB53F',
+        project_id: 1
+      })
+      .then(response => {
+        response.should.have.status(201);
+        response.body.should.be.a('array');
+        response.body.length.should.equal(1);
+        response.body[0].should.have.property('name');
+        response.body[0].id.should.equal(3);
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('Modest Mouse')
+
+        chai.request(server)
+        .get('/api/v1/projects/1/palettes')
+        .then(response => {
+          response.should.have.status(200);
+          response.should.be.json;
+          response.body.should.be.a('array');
+          response.body.length.should.equal(3);
+          response.body[2].should.have.property('name');
+          response.body[2].name.should.equal('Modest Mouse');
+          response.body[2].project_id.should.equal(1);
+          response.body[2].should.have.property('hex1');
+          response.body[2].should.have.property('hex2');
+          response.body[2].should.have.property('hex3');
+          response.body[2].should.have.property('hex4');
+          response.body[2].should.have.property('hex5');
+          response.body[2].hex1.should.equal('#A9E9D2');
+          response.body[2].hex2.should.equal('#9C5553');
+          response.body[2].hex3.should.equal('#BB10A0');
+          response.body[2].hex4.should.equal('#36DE11');
+          response.body[2].hex5.should.equal('#FDB53F');
+          done();
+        })
+        .catch(error => {
+          throw error;
+        });
+      });
+    });
+  });
+
+
+
 
 
 
