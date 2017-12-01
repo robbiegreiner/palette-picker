@@ -98,24 +98,15 @@ const showProjects = (projects) => {
   });
 };
 
-const checkDuplicateNames = () => {
+const checkDuplicateNames = (projects) => {
   const projectName = $('.project-input').val();
 
-  fetch('/api/v1/projects')
-    .then(response => response.json())
-    .then(projects => {
-      const duplicate = projects.find(project => projectName === project.name);
-      if (duplicate) {
-        alert('Name already used');
-        return;
-      }
-    });
 };
 
 const getProjects = () => {
+  checkDuplicateNames();
   $('.project').remove();
   fetch('/api/v1/projects')
-  .then(checkDuplicateNames())
   .then(response => response.json())
   .then(projects => {
     makeProjectList(projects);
