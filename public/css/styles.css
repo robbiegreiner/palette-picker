@@ -153,7 +153,6 @@ img {
 
 .project {
   margin-left: 5%;
-  /*margin-right: 2.5%;*/
   width: 490px;
 }
 
@@ -172,13 +171,6 @@ img {
   word-wrap: normal;
   text-align: center;
 }
-
-
-/*.new-button:hover {
-  background-color: white;
-  color: #008A9A;
-  border: 2px solid #2C4154;
-}*/
 
 .full-palette {
   display: flex;
