@@ -47,7 +47,7 @@ const makeProjectList = (projects) => {
 const showPalettes = (palettes) => {
   palettes.forEach(palette => {
     $(`.project${palette.project_id}`).append(`
-      <div class='full-palette' id='${palette.id}'>
+      <div class='full-palette' data-colorlist='${JSON.stringify([palette.hex1, palette.hex2, palette.hex3, palette.hex4, palette.hex5])}' id='${palette.id}'>
         <h3>${palette.name}</h3>
         <button class='delete-palette'>Delete</button>
         <div class='small-color'
@@ -67,6 +67,16 @@ const showPalettes = (palettes) => {
         </div>
       </div>
     `);
+  });
+};
+
+const showSavedPaletteAbove = (event) => {
+  const palette = $(event.target).closest('.full-palette');
+  const colors = JSON.parse(palette.attr('data-colorlist'));
+  console.log(colors);
+
+  colors.forEach((color, index) => {
+    $(`.color${index + 1}`).css('background-color', color);
   });
 };
 
@@ -173,3 +183,4 @@ $('.new-button').on('click', setPalette);
 $('.save-button').on('click', savePalette);
 $('.save-project').on('click', saveProject);
 $('.projects-container').on('click', '.delete-palette', (event) => deletePalette(event));
+$('.projects-container').on('click', '.full-palette', (event) => showSavedPaletteAbove(event));
