@@ -19,11 +19,11 @@ const setPalette = () => {
 
 const lockUnlockColor = (event) => {
   const bar = $(event.target);
-  if (bar.attr('src') === './assets/unlock.svg'){
-    bar.attr('src', './assets/padlock.svg');
+  if (bar.attr('src') === './assets/unlock-white.svg'){
+    bar.attr('src', './assets/padlock-white.svg');
     bar.closest('.color').toggleClass('locked');
   } else {
-    bar.attr('src', './assets/unlock.svg');
+    bar.attr('src', './assets/unlock-white.svg');
     bar.closest('.color').toggleClass('locked');
   }
 };
@@ -48,8 +48,7 @@ const showPalettes = (palettes) => {
   palettes.forEach(palette => {
     $(`.project${palette.project_id}`).append(`
       <div class='full-palette' data-colorlist='${JSON.stringify([palette.hex1, palette.hex2, palette.hex3, palette.hex4, palette.hex5])}' id='${palette.id}'>
-        <h3>${palette.name}</h3>
-        <button class='delete-palette'>Delete</button>
+        <h3 class='palette-name'>${palette.name}</h3>
         <div class='small-color'
           style='background-color: ${palette.hex1}'>
         </div>
@@ -65,6 +64,7 @@ const showPalettes = (palettes) => {
         <div class='small-color'
           style='background-color: ${palette.hex5}'>
         </div>
+        <button class='delete-palette'>Delete</button>
       </div>
     `);
   });
@@ -92,13 +92,19 @@ const showProjects = (projects) => {
   projects.forEach(project => {
     $('.projects-container').append(`
       <div class='project${project.id} project'>
-        <h2>${project.name}</h2>
+        <h2 class='project-name'>${project.name}</h2>
       </div>
     `);
   });
 };
 
+const checkDuplicateNames = (projects) => {
+  const projectName = $('.project-input').val();
+
+};
+
 const getProjects = () => {
+  checkDuplicateNames();
   $('.project').remove();
   fetch('/api/v1/projects')
   .then(response => response.json())
@@ -136,6 +142,7 @@ const savePalette = () => {
 };
 
 const saveProject = () => {
+  checkDuplicateNames();
   const projectName = JSON.stringify({
     name: $('.project-input').val()
   });
@@ -169,11 +176,6 @@ const deletePalette = (event) => {
   $(event.target).closest('.full-palette').remove();
 };
 
-
-
-
-
-
 // event listeners
 $(document).ready(setPalette);
 $(document).ready(getProjects);
@@ -183,4 +185,4 @@ $('.new-button').on('click', setPalette);
 $('.save-button').on('click', savePalette);
 $('.save-project').on('click', saveProject);
 $('.projects-container').on('click', '.delete-palette', (event) => deletePalette(event));
-$('.projects-container').on('click', '.full-palette', (event) => showSavedPaletteAbove(event));
+$('.projects-container').on('click', '.small-color', (event) => showSavedPaletteAbove(event));
