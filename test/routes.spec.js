@@ -165,6 +165,55 @@ describe('API Routes', () => {
         throw error;
       });
     });
+
+    it('should return status 500 if project does not exist', (done) => {
+      chai.request(server)
+      .get('/api/v1/projects/*/palettes')
+      .then(response => {
+        response.should.have.status(500);
+        done();
+      })
+      .catch(error => {
+        throw error;
+      });
+    });
   });
 
-});
+  describe('POST /api/v1/projects/', () => {
+    it('should add a new project in the database', (done) => {
+      chai.request(server)
+      .post('/api/v1/projects')
+      .send({
+        id: 3,
+        name: 'Voldemort\'s New Blog'
+      })
+      .then(response => {
+        response.should.have.status(201);
+        response.body.should.be.a('array');
+        response.body.length.should.equal(1);
+        response.body[0].should.have.property('id');
+        response.body[0].id.should.equal(3);
+        response.body[0].should.have.property('name');
+        response.body[0].name.should.equal('Voldemort\'s New Blog')
+
+        chai.request(server)
+        .get('/api/v1/projects')
+        .then(response => {
+          response.should.have.status(200);
+          response.should.be.json;
+          response.body.should.be.a('array');
+          response.body.length.should.equal(2);
+          done();
+        })
+        .catch(error => {
+          throw error;
+        });
+      });
+    });
+  });
+
+
+
+
+
+});//end of api routes
