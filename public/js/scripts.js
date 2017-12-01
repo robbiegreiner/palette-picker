@@ -17,7 +17,6 @@ const setPalette = () => {
   }
 };
 
-//add images
 const lockUnlockColor = (event) => {
   const bar = $(event.target);
   if (bar.attr('src') === './assets/unlock.svg'){
@@ -27,7 +26,12 @@ const lockUnlockColor = (event) => {
     bar.attr('src', './assets/unlock.svg');
     bar.closest('.color').toggleClass('locked');
   }
+};
 
+const editColor = (event) => {
+  const bar = $(event.target);
+  const barColor = bar.text();
+  bar.closest('.color').css('background-color', barColor);
 };
 
 const addProject = (name, value) => {
@@ -160,7 +164,8 @@ const deletePalette = (event) => {
 // event listeners
 $(document).ready(setPalette);
 $(document).ready(getProjects);
-$('.color').on('click', ".lock-button", (event => lockUnlockColor(event)));
+$('.color').on('click', '.lock-button', (event => lockUnlockColor(event)));
+$('.color').on('focusout', '.hex-text', (event) => editColor(event));
 $('.new-button').on('click', setPalette);
 $('.save-button').on('click', savePalette);
 $('.save-project').on('click', saveProject);
