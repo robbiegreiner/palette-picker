@@ -11,8 +11,10 @@ module.exports = {
   },
   // Having a problem with one of these rules? Learn more about it here: https://eslint.org/docs/rules/
   "rules": {
+    "no-console": 0,
+    "name-length": 0,
+    "id-length": 0,
     "eqeqeq": ["error", "always"],
-    "getter-return": ["error", { "allowImplicit": true }],
     "indent": ["warn", 2],
     "no-template-curly-in-string": "error",
     "semi": ["error", "always"],
@@ -27,9 +29,9 @@ module.exports = {
     "keyword-spacing": ["error", { "before": true, "after": true }],
     "max-len": ["warn", 1280],
     "no-duplicate-imports": "error",
-    "id-length": "error",
     "id-blacklist": ["error", "data", "err", "e", "cb", "callback", "payload", "obj", "arr"],
-    "max-depth": ["warn", 4]
+    "max-depth": ["warn", 4],
+    "no-unused-vars": "warn"
   },
   "globals": {
     "expect": true
