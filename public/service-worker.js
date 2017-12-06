@@ -5,8 +5,8 @@ this.addEventListener('install', event => {
       return cache.addAll([
         '/',
         '/js/scripts.js',
-        '/img/padlock-white.svg',
-        '/img/unlock-white.svg',
+        '/assets/padlock-white.svg',
+        '/assets/unlock-white.svg',
         '/css/styles.css'
       ]);
     })
