@@ -194,3 +194,15 @@ $('.save-button').on('click', savePalette);
 $('.save-project').on('click', saveProject);
 $('.projects-container').on('click', '.delete-palette', (event) => deletePalette(event));
 $('.projects-container').on('click', '.small-color', (event) => showSavedPaletteAbove(event));
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(registration => {
+        console.log('Service Worker registration successful');
+      })
+      .catch(error => {
+        console.log(`Service worker registration failed: ${error}`);
+      });
+  });
+}
