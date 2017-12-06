@@ -6,23 +6,23 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "img/icon-48.png",
-      "type": "image/png",
+      "src": "assets/icon-48.jpeg",
+      "type": "image/jpeg",
       "sizes": "48x48"
     },
     {
-      "src": "img/icon-96.png",
-      "type": "image/png",
+      "src": "assets/icon-96.jpeg",
+      "type": "image/jpeg",
       "sizes": "96x96"
     },
     {
-      "src": "img/icon-192.png",
-      "type": "image/png",
+      "src": "assets/icon-192.jpeg",
+      "type": "image/jpeg",
       "sizes": "192x192"
     },
     {
-      "src": "img/icon-512.png",
-      "type": "image/png",
+      "src": "assets/icon-512.jpeg",
+      "type": "image/jpeg",
       "sizes": "512x512"
     }
   ],
