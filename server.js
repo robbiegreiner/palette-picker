@@ -11,6 +11,14 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use((request, response, next) => {
+  if (request.secure){
+    response.redirect(`https://${request.header('host')}${request.url}`);
+  } else {
+    next();
+  }
+});
+
 app.get('/api/v1/projects', (request, response) => {
   database('projects').select()
     .then((projects) => {
